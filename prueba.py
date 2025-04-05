@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt  # Corregido: Importar matplotlib.pyplot
 
 """
-****************************************************************************************
-PREGUNTA 1: SELECCION DEL CONJUNTO DE DATOS
-*****************************************************************************************
+*********************************************
+1. SELECCION DEL CONJUNTO DE DATOS
+*********************************************
 """
 # Se tomó data real del SENAMHI sobre Contaminantes del Aire
 
@@ -16,16 +16,16 @@ PREGUNTA 1: SELECCION DEL CONJUNTO DE DATOS
 
 
 """
-****************************************************************************************
-PREGUNTA 2 : CARGA Y PROCESAMIENTO DE DATOS
-*****************************************************************************************
+*********************************************
+2. CARGA Y PROCESAMIENTO DE DATOS
+*********************************************
 """
 # Lectura y Carga del archivo CSV original
 df = pd.read_csv('datos_Ate.csv', sep=';')
-print("===================================================================================================================================================================\n\nHacemos la carga del archivo csv original datos_Ate.csv\n")
+print(f"\n{'='*130}\nHacemos la carga del archivo csv original datos_Ate.csv\n")
 
 # Información general del dataset original numero de columnas ,numero de filas y tipo de datos
-print("\n===================================================================================================================================================================\nInformación general del dataset original numero de columnas ,numero de filas y tipo de datos:\n")
+print(f"\n{'='*130}\nInformación general del dataset original numero de columnas ,numero de filas y tipo de datos:\n")
 print(df.info())
 
 #Manejo de valores nulos y datos faltantes.
@@ -54,10 +54,10 @@ print("DataFrame guardado en datos_nulos_agregados_Ate.csv")
 
 # Carga del DataFrame modificado (con O3 y CO rellenados)
 df_modificado = pd.read_csv('datos_nulos_agregados_Ate.csv')
-print("===================================================================================================================================================================\n\nHacemos la carga del archivo csv modificado datos_nulos_agregados_Ate.csv\n\n===================================================================================================================================================================\n")
+print(f"{'='*130}\n")
 
 # Operaciones con NumPy y creación de nuevas columnas en el DataFrame modificado
-print("===================================================================================================================================================================\n\nOperaciones con NumPy y creación de nuevas columnas\n\n===================================================================================================================================================================\n")
+print(f"{'='*130}\n\nOperaciones con NumPy y creación de nuevas columnas\n\n{'='*130}\n")
 df_modificado['ICA'] = np.sqrt(df_modificado['PM 10']**2 + df_modificado['NO2']**2)  # Ejemplo simplificado de ICA
 df_modificado['Promedio_Gaseosos'] = df_modificado[['NO2', 'O3', 'CO', 'SO2']].mean(axis=1)
 print(df_modificado)
@@ -65,16 +65,16 @@ print(df_modificado)
 
 
 """
-****************************************************************************************
-PREGUNTA 3 ANALISIS DE DATOS
-*****************************************************************************************
+*********************************************
+3. ANALISIS DE DATOS
+*********************************************
 """
 # Análisis descriptivo
-print("\n===================================================================================================================================================================\nAnálisis descriptivo:\n")
+print(f"\n{'='*130}\nAnálisis descriptivo:\n")
 print(df_modificado.describe())
 
 # Identificación de patrones y correlaciones
-print("\n===================================================================================================================================================================\nCorrelaciones:\n")
+print(f"\n{'='*130}\nCorrelaciones:\n")
 #para las columnas de contaminantes para calcular las correlaciones
 correlaciones_df = df_modificado[['DIA','HORA','PM 10', 'SO2', 'NO2', 'O3', 'CO','ICA','Promedio_Gaseosos',]]
 print(correlaciones_df.corr())
@@ -84,27 +84,27 @@ print(correlaciones_df.corr())
 
 #primer filtro
 #indicador mayor a 100 en PM 10
-print("\n===================================================================================================================================================================\nDatos con PM 10 mayor a 100:\n")
+print(f"\n{'='*130}\nDatos con PM 10 mayor a 100:\n")
 print(df_modificado[df_modificado['PM 10'] > 100])
 
 
 #falta una segmentacion
 #datos del dia lunes
-print("\n===================================================================================================================================================================\nDatos del día Lunes:\n")
+print(f"\n{'='*130}\nDatos del día Lunes:\n")
 print(df_modificado[df_modificado['DIA'] == 'Lunes'])
 
 
 #Segundo filtro 
 #indicador SO2 menor a 50
-print("\n===================================================================================================================================================================\nDatos con SO2 menor a 50:\n")
+print(f"\n{'='*130}\nDatos con SO2 menor a 50:\n")
 print(df_modificado[df_modificado['SO2'] < 50])
 
 
 
 """
-****************************************************************************************
-PREGUNTA 4 : VISUALIZACION DE DATOS
-*****************************************************************************************
+*********************************************
+4. VISUALIZACION DE DATOS
+*********************************************
 """
 
 # Visualización de datos
